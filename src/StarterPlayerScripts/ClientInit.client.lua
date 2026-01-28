@@ -37,6 +37,7 @@ local CashController = require(Controllers:WaitForChild("CashController"))
 local OreDiscoveryPopup = require(Controllers:WaitForChild("OreDiscoveryPopup"))
 local StructureController = require(Controllers:WaitForChild("StructureController"))
 local TutorialController = require(Controllers:WaitForChild("TutorialController"))
+local MegaBrainrotController = require(Controllers:WaitForChild("MegaBrainrotController"))
 
 --------------------------------------------------------------------------------
 -- LAYER NOTIFICATION SYSTEM (ANIMATED GRADIENT STYLE)
@@ -607,6 +608,7 @@ LayerProgressController.Initialize()
 OreDiscoveryPopup.Initialize()
 StructureController.Initialize()
 TutorialController.Initialize()
+MegaBrainrotController.Initialize()
 
 local CurrentTrackedLayerIndex: number = 1
 local LastTrackedDepth: number = -1

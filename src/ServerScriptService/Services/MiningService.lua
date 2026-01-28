@@ -517,6 +517,30 @@ local function OnMiningRequest(player: Player, block: BasePart)
 		local blockPos = block.Position
 		local blockData = MineGenerator.GetBlockData(block)
 
+		-- Check for Mega Brainrot first (special handling)
+		local isMegaBrainrot = block:GetAttribute("IsMegaBrainrot") == true
+		if isMegaBrainrot then
+			-- Delegate to MegaBrainrotService if available
+			local MegaBrainrotService = nil
+			pcall(function()
+				local servicesFolder = ServerScriptService:FindFirstChild("Services")
+				if servicesFolder then
+					local megaModule = servicesFolder:FindFirstChild("MegaBrainrotService")
+					if megaModule then
+						MegaBrainrotService = require(megaModule)
+					end
+				end
+			end)
+
+			if MegaBrainrotService and MegaBrainrotService.OnMegaBrainrotMined then
+				MegaBrainrotService.OnMegaBrainrotMined(player, block)
+			end
+
+			if DataService then DataService.IncrementStat(player, "TotalBlocksMined") end
+			block:Destroy()
+			return
+		end
+
 		if blockData then
 			if blockData.BlockType == "Brainrot" then
 				local layerIndex = blockData.LayerIndex or 1

@@ -74,6 +74,7 @@ local DataService = require(Services:WaitForChild("DataService"))
 local StructureService = require(Services:WaitForChild("StructureService"))
 
 local TutorialService = require(Services:WaitForChild("TutorialService"))
+local MegaBrainrotService = require(Services:WaitForChild("MegaBrainrotService"))
 
 --------------------------------------------------------------------------------
 -- GAME LOOP LOGIC
@@ -196,6 +197,9 @@ DataService.SetServiceReferences(MiningService, StructureService, TutorialServic
 
 TutorialService.Initialize(DataService, MiningService, StructureService)
 
+-- Step 6: Initialize MegaBrainrotService (global timer system)
+MegaBrainrotService.Initialize(MineGenerator, MiningService, DataService)
+
 print("[ServerInit] Services initialized, setting up data loading...")
 
 --------------------------------------------------------------------------------
@@ -246,4 +250,5 @@ end)
 print("[ServerInit] ========================================")
 print("[ServerInit] All systems online.")
 print("[ServerInit] Persistence: Eggs, Units, Structures")
+print("[ServerInit] MegaBrainrot: Global Timer Active")
 print("[ServerInit] ========================================")
